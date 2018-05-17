@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MapApp"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:customControls="clr-namespace:MapApp.CustomControls;assembly=MapApp"
+             x:Class="MapApp.Views.MainPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <customControls:CustomMap CustomPins="{Binding Pins, Mode=TwoWay}"/>
+            <Button Text="Add pin" Command="{Binding AddPinCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

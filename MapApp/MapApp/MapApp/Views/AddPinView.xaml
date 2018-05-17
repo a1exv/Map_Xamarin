@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:customControls="clr-namespace:MapApp.CustomControls;assembly=MapApp"
+             x:Class="MapApp.Views.AddPinView"
+             Title="Create new pin">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="You must fill all fields and set coordinate!" IsVisible="{Binding IsWarningVisible}" TextColor="Red"/>
+            <Entry Text="{Binding Name}" Placeholder="name..."/>
+            <Entry Text="{Binding Description}" Placeholder="decription..."/>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Rating: "/>
+                <Label Text="{Binding Rating}"/>
+            </StackLayout>
+            
+            <Slider   Maximum="10" Minimum="1" Value="{Binding Rating}"/>
+            <Label Text="Select coordinate:" TextColor="Black"/>
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="X:"  TextColor="Black" FontAttributes="Bold"/>
+                <Label Grid.Column="1" Text="{Binding Latitude}" TextColor="Black"/>
+                <Label Grid.Column="2" Text="Y:" TextColor="Black"  FontAttributes="Bold"/>
+                <Label Grid.Column="3" Text="{Binding Longitude}" TextColor="Black"/>
+            </Grid>
+            <customControls:CustomMap />
+            <Button Text="Create pin" Command="{Binding CreatePinCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
