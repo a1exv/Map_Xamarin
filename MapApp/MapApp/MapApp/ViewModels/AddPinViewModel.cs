@@ -121,13 +121,18 @@ namespace MapApp.ViewModels
             if (_isSetCoordinate && !string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Description))
             {
                 List<CustomPin> pins;
+                pins = new List<CustomPin>();
                 if (App.Current.Properties.ContainsKey("Pins"))
                 {
-                    pins = (List<CustomPin>) App.Current.Properties["Pins"];
+                    var oldPins = (List<CustomPin>)App.Current.Properties["Pins"];
+                    foreach (var customPin in oldPins)
+                    {
+                        pins.Add(customPin);
+                    }
                 }
                 else
                 {
-                    pins = new List<CustomPin>();
+
                     App.Current.Properties.Add("Pins", pins);
                 }
                 var pin = new CustomPin()

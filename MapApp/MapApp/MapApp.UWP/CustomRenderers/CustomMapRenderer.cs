@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,6 +68,29 @@ namespace MapApp.UWP.CustomRenderers
         private void NativaMap_MapTapped(MapControl sender, MapInputEventArgs args)
         {
             ((CustomMap) Element).SetLocation(args.Location.Position.Latitude, args.Location.Position.Longitude);
+        }
+
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.Equals("CustomPins"))
+            {
+                customPins = ((CustomMap)Element).CustomPins;
+                if (customPins != null)
+                {
+                    foreach (var pin in customPins)
+                    {
+                        var snPosition = new BasicGeoposition()
+                        {
+                            Latitude = pin.Position.Latitude,
+                            Longitude = pin.Position.Longitude
+                        };
+                        var snPoint = new Geopoint(snPosition);
+                        var mapIcon = new MapIcon();
+                        mapIcon.Location = snPoint;
+                        nativaMap.MapElements.Add(mapIcon);
+                    }
+                }
+            }
         }
 
         private void OnMapElementClick(MapControl sender, MapElementClickEventArgs e)
